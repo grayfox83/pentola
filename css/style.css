@@ -1,0 +1,28 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Impact, serif;
+    font-size: 21px;
+}
+.main-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.farce {
+
+}
+
+.line {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.line-role {
+    font-weight: 700;
+}
+
+.line-text {
+
+}
