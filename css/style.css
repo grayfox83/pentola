@@ -2,8 +2,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    width: 100%;
     font-family: Impact, serif;
-    font-size: 21px;
+    font-size: 2em;
 }
 .main-list {
     display: flex;
@@ -11,18 +13,40 @@
 }
 
 .farce {
-
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    font-family: Arial, serif;
+    font-size: 40px;
 }
 
 .line {
     display: inline-flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: start;
+    width: 95%;
+    margin: 0 20px;
 }
 
 .line-role {
-    font-weight: 700;
+    font-style: oblique;
+    width: 30%;
+    padding-right: 20px;
 }
 
 .line-text {
+    width: 70%
+}
 
+.line + .line {
+    margin-top: 10px;
+}
+
+a,
+a:visited {
+    color: darkblue;
+    text-decoration: none;
 }
