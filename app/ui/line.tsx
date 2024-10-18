@@ -1,9 +1,14 @@
+import {LineInterface} from "../interfaces/LineInterface";
+
 export function Line({
     role,
     line
 }: {
     role: string,
-    line: Array<{LineInterface}>
+    line: Array<{
+        s: string,
+        action: boolean
+    }>
 }) {
     return (
         <div className='play-line flex flex-row w-full p-2'>
