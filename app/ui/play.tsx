@@ -11,7 +11,7 @@ export function Play({
 }: {
     play:{roles:Array<RoleInterface>, lines:Array<LineInterface>}
 }) {
-    const roles = {};
+    const roles:{[k: string]: string} = {};
     if (play && play.roles) {
         play.roles.map((role) => {
             roles[role.id] = role.name;
