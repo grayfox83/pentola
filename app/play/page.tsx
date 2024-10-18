@@ -7,21 +7,20 @@ export default function Page() {
     const [data, setData] = useState(null)
     const [isLoading, setLoading] = useState(true)
     const searchParams = useSearchParams();
+    let play = searchParams.get('name')
+    const regex = new RegExp('^[a-z]+$');
+    if (typeof play !== "string" || !regex.test(play)) {
+       play = "error";
+    }
     useEffect(() => {
-        const play = searchParams.get('name')
-        const regex = new RegExp('^[a-z]+$');
-        if (typeof play !== "string" || !regex.test(play)) {
-            setLoading(false);
-            setData(null);
-        } else {
-            fetch('/plays/' + play + '.json').then(r => r.json()).then(data => {
-                    setData(data)
-                    setLoading(false)
-                }
-            ).catch(() => {
+        fetch('/plays/' + play + '.json').then(r => r.json()).then(data => {
+                setData(data)
                 setLoading(false)
-            })
-        }
+            }
+        ).catch(() => {
+            setData(null)
+            setLoading(false)
+        })
     }, []);
     if (isLoading) return <p>Загрузка...</p>
     if (!data) return <p>Нет данных</p>
