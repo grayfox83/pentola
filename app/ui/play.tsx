@@ -1,10 +1,16 @@
 import {Line} from './line';
 
-export function Play({play}: object) {
+export function Play({
+    play
+}: {
+    play: object
+}) {
     const roles = {};
-    play.roles.map((role) => {
-        roles[role.id] = role.name;
-    })
+    if (play && play.roles) {
+        play.roles.map((role) => {
+            roles[role.id] = role.name;
+        })
+    }
 
     return  <div className={'flex flex-col justify-center w-9/10'}>
         <h1 className={'flex justify-center'}>{play.title}:</h1>
