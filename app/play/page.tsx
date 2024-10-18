@@ -1,8 +1,7 @@
 import {promises as fs} from "fs";
 import {Play} from "../ui/play";
 
-export default async function Page({params, searchParams}: {
-    params: { slug: string }
+export default async function Page({searchParams}: {
     searchParams: { [key: string]: string | string[] | undefined }
 }) {
     const play = searchParams.name;
