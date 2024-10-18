@@ -1,5 +1,3 @@
-import {LineInterface} from "../interfaces/LineInterface";
-
 export function Line({
     role,
     line
