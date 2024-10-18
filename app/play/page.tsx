@@ -4,7 +4,7 @@ import {Play} from "../ui/play";
 export default async function Page({searchParams}: {
     searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-    const play = searchParams.name;
+    const play = searchParams? searchParams.name : '';
     const regex = new RegExp('^[a-z]+$');
     if (typeof play !== "string" || !regex.test(play)) {
         return  <div>
