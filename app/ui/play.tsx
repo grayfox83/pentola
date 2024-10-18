@@ -1,11 +1,7 @@
 "use client";
 import {Line} from './line';
 import {LineInterface} from "../interfaces/LineInterface";
-
-interface RoleInterface {
-    id:number,
-    name: string
-}
+import {RoleInterface} from "../interfaces/RoleInterface";
 
 function highlightRole(roleId:number):void {
     const lines = document.querySelectorAll('[role-id]');
