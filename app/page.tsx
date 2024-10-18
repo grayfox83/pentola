@@ -1,7 +1,7 @@
 import {Library} from "./lib/library";
 
 
-export default async function Page() {
+export default function Page() {
     const library = Library();
     return <div className={'flex flex-col'}>
         <h1>Пьесы:</h1>

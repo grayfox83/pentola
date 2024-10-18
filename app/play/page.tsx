@@ -1,25 +1,35 @@
 'use client';
 import {Play} from "../ui/play";
 import {useSearchParams} from "next/navigation";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function Page() {
+    const [data, setData] = useState(null)
+    const [isLoading, setLoading] = useState(true)
     const searchParams = useSearchParams()
     const play = searchParams.get('name')
     const regex = new RegExp('^[a-z]+$');
     if (typeof play !== "string" || !regex.test(play)) {
+        setLoading(false)
         return  <div>
             Incorrect input
         </div>
     }
-    const [data, setData] = useState(null)
-    const [isLoading, setLoading] = useState(true)
-    fetch('/plays/' + play + '.json').then(r => r.json()).then(data => {
-        setData(data)
-        setLoading(false)
-    })
-    if (isLoading) return <p>Loading...</p>
-    if (!data) return <p>No data present</p>
 
-    return <Play play={data}/>
+    useEffect(() => {
+        fetch('/plays/' + play + '.json').then(r => r.json()).then(data => {
+                setData(data)
+                setLoading(false)
+            }
+        ).catch((e) => {
+            setLoading(false)
+        })
+    }, []);
+    if (isLoading) return <p>Загрузка...</p>
+    if (!data) return <p>No data</p>
+
+    return <div>
+        <a className={'font-medium text-blue-600 dark:text-blue-500'} href={'/'}>back</a>
+        <Play play={data}/>
+    </div>
 }
