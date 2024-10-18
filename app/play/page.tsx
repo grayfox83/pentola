@@ -21,11 +21,11 @@ export default function Page() {
             setData(null)
             setLoading(false)
         })
-    }, []);
-    if (isLoading) return <p>Загрузка...</p>
-    if (!data) return <p>Нет данных</p>
+    }, ['play']);
+    if (isLoading) return <div>Загрузка...</div>
+    if (!data) return <div>Нет данных</div>
 
-    return <Suspense>
+    return <Suspense fallback={<div>Загрузка...</div>}>
         <div>
         <a className={'font-medium text-blue-600 dark:text-blue-500'} href={'/'}>НАЗАД</a>
         <Play play={data}/>
