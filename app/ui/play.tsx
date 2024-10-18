@@ -1,9 +1,22 @@
 import {Line} from './line';
 
+interface RoleInterface {
+    id:number,
+    name: string
+}
+
+interface LineInterface {
+    roleId: number,
+    line: Array<{
+        s: string,
+        action: boolean
+    }>
+}
+
 export function Play({
     play
 }: {
-    play:{roles:Array<any>, lines:Array<any>}
+    play:{roles:Array<RoleInterface>, lines:Array<LineInterface>}
 }) {
     const roles = {};
     if (play && play.roles) {
