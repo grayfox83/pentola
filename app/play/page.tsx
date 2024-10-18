@@ -1,15 +1,25 @@
-import {promises as fs} from "fs";
+'use client';
 import {Play} from "../ui/play";
+import {useSearchParams} from "next/navigation";
+import {useState} from "react";
 
-export default async function Page() {
-    const play = "millhell";
+export default function Page() {
+    const searchParams = useSearchParams()
+    const play = searchParams.get('name')
     const regex = new RegExp('^[a-z]+$');
     if (typeof play !== "string" || !regex.test(play)) {
         return  <div>
             Incorrect input
         </div>
     }
-    const file = await fs.readFile(process.cwd() + "/app/data/plays/" + play + ".json", 'utf8');
-    const data = JSON.parse(file);
+    const [data, setData] = useState(null)
+    const [isLoading, setLoading] = useState(true)
+    fetch('/plays/' + play + '.json').then(r => r.json()).then(data => {
+        setData(data)
+        setLoading(false)
+    })
+    if (isLoading) return <p>Loading...</p>
+    if (!data) return <p>No data present</p>
+
     return <Play play={data}/>
 }
