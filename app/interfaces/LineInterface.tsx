@@ -1,7 +1,7 @@
 export interface LineInterface {
     action: string;
     roleId: number,
-    lines: Array<{
+    line: Array<{
         s: string,
         action: boolean
     }>

@@ -9,7 +9,7 @@ interface RoleInterface {
 export function Play({
     play
 }: {
-    play:{roles:Array<RoleInterface>, lines:Array<LineInterface>}
+    play:{title: string, roles:Array<RoleInterface>, lines:Array<LineInterface>}
 }) {
     const roles:{[k: string]: string} = {};
     if (play && play.roles) {
