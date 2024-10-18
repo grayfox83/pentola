@@ -10,9 +10,19 @@ interface RoleInterface {
 function highlightRole(roleId:number):void {
     const lines = document.querySelectorAll('[role-id]');
     lines.forEach((elem) => {
-        elem.classList.toggle('highlight-role', elem.getAttribute('role-id') === roleId.toString());
+        if (elem.getAttribute('role-id') === roleId.toString()) {
+            elem.classList.toggle('highlight-role');
+        }
     })
+}
 
+function resetHighlightRole() {
+    const lines = document.querySelectorAll('[role-id]');
+    lines.forEach((elem) => {
+        if (elem.getAttribute('role-id')) {
+            elem.classList.remove('highlight-role');
+        }
+    })
 }
 
 export function Play({
@@ -31,10 +41,14 @@ export function Play({
         <h1 className={'flex justify-center p-1 mb-3 mt-3'}>{play.title}:</h1>
         <div className={'inline-block roles'}>
             {play.roles.filter(role => role.name).map((role) => {
-                return <div className={"role inline-block cursor-pointer hover:opacity-75"} key={role.id}>
-                    <div onClick={() => highlightRole(role.id)}>[{role.name}]</div>
+                return <div role-id={role.id} className={"role inline-block cursor-pointer hover:opacity-75"} key={role.id}>
+                    <div onClick={() => highlightRole(role.id)}>
+                        [{role.name}]
+                    </div>
                 </div>
             })}
+            <div className={"role inline-block cursor-pointer hover:opacity-75"}
+                onClick={() => resetHighlightRole()}>[X]</div>
         </div>
         <div className={'flex flex-col justify-center'}>
             {play.lines?.map( (line, index) =>
