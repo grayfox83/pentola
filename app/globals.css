@@ -42,3 +42,15 @@ h1 {
 .play-line-text {
   display: block;
 }
+
+.roles {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.role+.role {
+  margin-left: 10px;
+}
+
+.highlight-role {
+  color: lightgreen;
+}

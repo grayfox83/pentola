@@ -7,6 +7,14 @@ interface RoleInterface {
     name: string
 }
 
+function highlightRole(roleId:number):void {
+    const lines = document.querySelectorAll('[role-id]');
+    lines.forEach((elem) => {
+        elem.classList.toggle('highlight-role', elem.getAttribute('role-id') === roleId.toString());
+    })
+
+}
+
 export function Play({
     play
 }: {
@@ -20,10 +28,17 @@ export function Play({
     }
 
     return  <div className={'flex flex-col justify-center w-9/10'}>
-        <h1 className={'flex justify-center'}>{play.title}:</h1>
+        <h1 className={'flex justify-center p-1 mb-3 mt-3'}>{play.title}:</h1>
+        <div className={'inline-block roles'}>
+            {play.roles.filter(role => role.name).map((role) => {
+                return <div className={"role inline-block cursor-pointer hover:opacity-75"} key={role.id}>
+                    <div onClick={() => highlightRole(role.id)}>[{role.name}]</div>
+                </div>
+            })}
+        </div>
         <div className={'flex flex-col justify-center'}>
             {play.lines?.map( (line, index) =>
-                <Line role={roles[line.roleId]} line={line.line} key={'line_' + index} />
+                <Line roleId={line.roleId} role={roles[line.roleId]} line={line.line} key={'line_' + index} />
             )}
         </div>
     </div>;
