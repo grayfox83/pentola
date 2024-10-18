@@ -15,7 +15,7 @@ export default async function Page({searchParams}: {
         const file = await fs.readFile(process.cwd() + "/app/data/plays/" + play + ".json", 'utf8');
         const data = JSON.parse(file);
         return <Play play={data}/>
-    } catch (e:Error) {
+    } catch (e:unknown) {
         console.log(e.message);
         return <div>
             Not found
