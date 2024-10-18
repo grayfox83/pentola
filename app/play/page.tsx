@@ -7,10 +7,9 @@ export default function Page() {
     const [data, setData] = useState(null)
     const [isLoading, setLoading] = useState(true)
     const searchParams = useSearchParams()
-
+    const play = searchParams.get('name')
+    const regex = new RegExp('^[a-z]+$');
     useEffect(() => {
-        const play = searchParams.get('name')
-        const regex = new RegExp('^[a-z]+$');
         if (typeof play !== "string" || !regex.test(play)) {
             setLoading(false);
             setData(null);
