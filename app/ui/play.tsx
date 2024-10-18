@@ -1,3 +1,4 @@
+"use client";
 import {Line} from './line';
 import {LineInterface} from "../interfaces/LineInterface";
 

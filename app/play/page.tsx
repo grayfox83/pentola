@@ -6,10 +6,10 @@ import {useEffect, useState} from "react";
 export default function Page() {
     const [data, setData] = useState(null)
     const [isLoading, setLoading] = useState(true)
-    const searchParams = useSearchParams()
-    const play = searchParams.get('name')
-    const regex = new RegExp('^[a-z]+$');
+    const searchParams = useSearchParams();
     useEffect(() => {
+        const play = searchParams.get('name')
+        const regex = new RegExp('^[a-z]+$');
         if (typeof play !== "string" || !regex.test(play)) {
             setLoading(false);
             setData(null);
@@ -29,5 +29,5 @@ export default function Page() {
     return <div>
         <a className={'font-medium text-blue-600 dark:text-blue-500'} href={'/'}>back</a>
         <Play play={data}/>
-    </div>
+    </div>;
 }
