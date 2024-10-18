@@ -1,7 +1,7 @@
 import {Line} from './line';
 
-export function Play({play}: Object) {
-    let roles = {};
+export function Play({play}: object) {
+    const roles = {};
     play.roles.map((role) => {
         roles[role.id] = role.name;
     })

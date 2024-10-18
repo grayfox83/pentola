@@ -2,7 +2,7 @@ import {Library} from "./lib/library";
 
 
 export default async function Page() {
-    let library = Library();
+    const library = Library();
     return <div className={'flex flex-col'}>
         <h1>Пьесы:</h1>
         {library.plays?.map( (play) =>
