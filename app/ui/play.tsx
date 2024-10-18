@@ -1,16 +1,9 @@
 import {Line} from './line';
+import {LineInterface} from "../interfaces/LineInterface";
 
 interface RoleInterface {
     id:number,
     name: string
-}
-
-interface LineInterface {
-    roleId: number,
-    line: Array<{
-        s: string,
-        action: boolean
-    }>
 }
 
 export function Play({
