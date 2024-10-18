@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #2c2c2c;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+h1 {
+  font-size: 30px;
+  padding-bottom: 30px;
+}
+
+.play-line:nth-child(even) {
+  background-color: #181818;
+}
+
+.play-line:nth-child(odd) {
+  background-color: #202020;
+}
+
+.play-line-text {
+  display: block;
+}

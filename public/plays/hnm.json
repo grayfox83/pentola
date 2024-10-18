@@ -1,0 +1,23 @@
+{
+  "title": "Husbando und waifu",
+  "roles": [
+    {
+      "name": "Waifu",
+      "id": 0
+    },
+    {
+      "name": "Husbando",
+      "id": 1
+    }
+  ],
+  "lines": [
+    {"roleId": 0, "line": [
+      {"s": "So desu ka?"},
+      {"s": "Watashi wa shinde"}
+    ]},
+    {"roleId": 1, "line": [
+      {"s":"Neee?"},
+      {"s":"Runs away", "action": true}
+    ]}
+  ]
+}
