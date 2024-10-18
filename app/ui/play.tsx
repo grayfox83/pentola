@@ -3,7 +3,7 @@ import {Line} from './line';
 export function Play({
     play
 }: {
-    play: object
+    play:{roles:Array<any>, lines:Array<any>}
 }) {
     const roles = {};
     if (play && play.roles) {
