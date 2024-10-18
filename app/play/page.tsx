@@ -1,7 +1,7 @@
 'use client';
 import {Play} from "../ui/play";
 import {useSearchParams} from "next/navigation";
-import {useEffect, useState} from "react";
+import {useEffect, useState, Suspense} from "react";
 
 export default function Page() {
     const [data, setData] = useState(null)
@@ -25,8 +25,10 @@ export default function Page() {
     if (isLoading) return <p>Загрузка...</p>
     if (!data) return <p>Нет данных</p>
 
-    return <div>
-        <a className={'font-medium text-blue-600 dark:text-blue-500'} href={'/'}>back</a>
+    return <Suspense>
+        <div>
+        <a className={'font-medium text-blue-600 dark:text-blue-500'} href={'/'}>НАЗАД</a>
         <Play play={data}/>
-    </div>;
+        </div>
+    </Suspense>;
 }
