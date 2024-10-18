@@ -3,7 +3,7 @@ export function Line({
     line
 }: {
     role: string,
-    line: object
+    line: Array<unknown>
 }) {
     return (
         <div className='play-line flex flex-row w-full p-2'>
