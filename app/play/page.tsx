@@ -19,13 +19,13 @@ export default function Page() {
                     setData(data)
                     setLoading(false)
                 }
-            ).catch((e) => {
+            ).catch(() => {
                 setLoading(false)
             })
         }
     }, []);
     if (isLoading) return <p>Загрузка...</p>
-    if (!data) return <p>No data</p>
+    if (!data) return <p>Нет данных</p>
 
     return <div>
         <a className={'font-medium text-blue-600 dark:text-blue-500'} href={'/'}>back</a>
