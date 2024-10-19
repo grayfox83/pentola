@@ -2,6 +2,7 @@
 import {Play} from "../ui/play";
 import {useSearchParams} from "next/navigation";
 import {useEffect, useState, Suspense} from "react";
+import Link from 'next/link';
 
 function GetData() {
     const [data, setData] = useState(null)
@@ -29,7 +30,7 @@ function GetData() {
     if (isLoading) return <div>Загрузка...</div>
     if (!data) return <div>Нет данных</div>
     return <div>
-             <a className={'font-medium text-blue-600 dark:text-blue-500'} href={'/'}>НАЗАД</a>
+        <Link className={'font-medium text-blue-600 dark:text-blue-500'} href='/'>НАЗАД</Link>
             <Play play={data}/>
         </div>
 }
