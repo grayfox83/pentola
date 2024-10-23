@@ -32,12 +32,22 @@ h1 {
 }
 
 .play-line:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+.play-line:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+@media (prefers-color-scheme: dark) {
+  .play-line:nth-child(even) {
   background-color: #181818;
 }
 
 .play-line:nth-child(odd) {
   background-color: #202020;
 }
+} 
 
 .play-line-text {
   display: block;
