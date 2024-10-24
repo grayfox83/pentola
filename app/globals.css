@@ -7,13 +7,6 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #2c2c2c;
-    --foreground: #ededed;
-  }
-}
-
 body {
   color: var(--foreground);
   background: var(--background);
@@ -39,16 +32,6 @@ h1 {
   background-color: #f9f9f9;
 }
 
-@media (prefers-color-scheme: dark) {
-  .play-line:nth-child(even) {
-  background-color: #181818;
-}
-
-.play-line:nth-child(odd) {
-  background-color: #202020;
-}
-} 
-
 .play-line-text {
   display: block;
 }
@@ -62,5 +45,24 @@ h1 {
 }
 
 .highlight-role {
-  color: lightgreen;
+  color: brown;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #2c2c2c;
+    --foreground: #ededed;
+  }
+
+  .play-line:nth-child(even) {
+    background-color: #181818;
+  }
+
+  .play-line:nth-child(odd) {
+    background-color: #202020;
+  }
+
+  .highlight-role {
+    color: lightgreen;
+  }
 }
