@@ -29,8 +29,8 @@ function GetData() {
     }, [play, isHydrated]);
     if (isLoading) return <div>Загрузка...</div>
     if (!data) return <div>Нет данных</div>
-    return <div>
-        <Link className={'font-medium text-blue-600 dark:text-blue-500'} href='/'>НАЗАД</Link>
+    return <div className={"flex flex-col m-1"}>
+        <Link className={'font-medium text-blue-600 dark:text-blue-500 ml-3 mt-3'} href='/'>НАЗАД</Link>
             <Play play={data}/>
         </div>
 }

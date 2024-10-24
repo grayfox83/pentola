@@ -34,7 +34,7 @@ export function Play({
     }
 
     return  <div className={'flex flex-col justify-center w-9/10'}>
-        <h1 className={'flex justify-center p-3 mb-3 mt-3'}>{play.title}:</h1>
+        <h1 className={'flex justify-center p-3 mb-3 mt-3 text-2xl'}>{play.title}:</h1>
         <div className={'inline-block roles'}>
             {play.roles.filter(role => role.name).map((role) => {
                 return <div role-id={role.id} className={"role inline-block cursor-pointer hover:opacity-75"} key={role.id}>
