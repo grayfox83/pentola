@@ -7,8 +7,13 @@ export function Library() {
         plays : [
             {
                 id: 0,
-                name: 'Мельник, чью душу чёрт в ад уволок',
+                name: 'Мельник, чью душу чёрт в ад уволок (оригинал)',
                 filename: 'millhell'
+            },
+            {
+                id: 1,
+                name: 'Мельник, чью душу чёрт в ад уволок (редакция)',
+                filename: 'millhelledit'
             }
         ]
     }
