@@ -8,12 +8,17 @@ export function Library() {
             {
                 id: 0,
                 name: 'Мельник, чью душу чёрт в ад уволок (оригинал)',
-                filename: 'millhell'
+                filename: "millhell"
             },
             {
                 id: 1,
                 name: 'Мельник, чью душу чёрт в ад уволок (редакция)',
-                filename: 'millhelledit'
+                filename: "millhelledit"
+            },
+            {
+                id: 2,
+                name: "Маюэ-простак",
+                filename: "mayuepr"
             }
         ]
     }
