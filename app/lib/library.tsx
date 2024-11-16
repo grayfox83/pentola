@@ -17,8 +17,13 @@ export function Library() {
             },
             {
                 id: 2,
-                name: "Маюэ-простак",
+                name: "Маюэ-простак (оригинал)",
                 filename: "mayuepr"
+            },
+            {
+                id: 3,
+                name: "Маюэ-простак (редакция)",
+                filename: "mayuepredit"
             }
         ]
     }
