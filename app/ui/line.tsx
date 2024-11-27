@@ -7,7 +7,7 @@ export function Line({
     role: string,
     line: Array<{
         s: string,
-        action: boolean
+        action?: boolean
     }>
 }) {
     return (
