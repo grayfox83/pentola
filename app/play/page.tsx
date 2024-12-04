@@ -17,7 +17,8 @@ function GetData() {
     useEffect(() => {
         setIsHydrated(true);
         if (isHydrated) { //loading once
-            fetch('plays/' + play + '.json').then(r => r.json()).then(data => {
+            const bust = new Date().getTime()
+            fetch('plays/' + play + '.json?' + bust).then(r => r.json()).then(data => {
                     setData(data)
                     setLoading(false)
                 }
