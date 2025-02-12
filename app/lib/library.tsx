@@ -24,6 +24,11 @@ export function Library() {
                 id: 3,
                 name: "Маюэ-простак (редакция)",
                 filename: "mayuepredit"
+            },
+            {
+                id: 4,
+                name: "Штаны святого Гильбера",
+                filename: "shtani"
             }
         ]
     }
