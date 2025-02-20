@@ -29,6 +29,11 @@ export function Library() {
                 id: 4,
                 name: "Штаны святого Гильбера",
                 filename: "shtani"
+            },
+            {
+                id: 5,
+                name: "Жены, которые решили переплавить своих мужей (оригинал)",
+                filename: "zheny"
             }
         ]
     }
