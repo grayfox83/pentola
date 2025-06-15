@@ -39,6 +39,11 @@ export function Library() {
                 id: 6,
                 name: "Жены, которые решили переплавить своих мужей (редакция)",
                 filename: "zhenyedit"
+            },
+            {
+                id: 7,
+                name: "Паштет и торт (оригинал)",
+                filename: "pashtet"
             }
         ]
     }
