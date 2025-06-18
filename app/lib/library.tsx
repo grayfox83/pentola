@@ -44,6 +44,11 @@ export function Library() {
                 id: 7,
                 name: "Паштет и торт (оригинал)",
                 filename: "pashtet"
+            },
+            {
+                id: 8,
+                name: "Паштет и торт (редакция)",
+                filename: "pashtetedit"
             }
         ]
     }
