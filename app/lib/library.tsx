@@ -49,6 +49,16 @@ export function Library() {
                 id: 8,
                 name: "Паштет и торт (редакция)",
                 filename: "pashtetedit"
+            },
+            {
+                id: 9,
+                name: "Дворянин и Ноде (оригинал)",
+                filename: "dvoryaninnode"
+            },
+            {
+                id: 10,
+                name: "Дворянин и Ноде (редакция)",
+                filename: "dvoryaninnodeedit"
             }
         ]
     }

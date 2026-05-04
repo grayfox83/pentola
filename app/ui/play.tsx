@@ -1,39 +1,10 @@
 "use client";
+
+import { useCallback, useState } from "react";
 import { Line } from "./line";
 import type { LineInterface } from "../interfaces/LineInterface";
 import type { RoleInterface } from "../interfaces/RoleInterface";
 import { lineRoleIds } from "../lib/lineRoleIds";
-
-const ROLE_ATTR = "data-role-id";
-const ROLE_IDS_ATTR = "data-role-ids";
-
-function parseRoleIdsAttr(raw: string | null): number[] {
-  if (!raw) return [];
-  return raw
-    .split(",")
-    .map((s) => parseInt(s.trim(), 10))
-    .filter((n) => !Number.isNaN(n));
-}
-
-function highlightRole(roleId: number): void {
-  document.querySelectorAll(`[${ROLE_ATTR}]`).forEach((elem) => {
-    if (elem.getAttribute(ROLE_ATTR) === roleId.toString()) {
-      elem.classList.toggle("highlight-role");
-    }
-  });
-  document.querySelectorAll(`[${ROLE_IDS_ATTR}]`).forEach((elem) => {
-    const ids = parseRoleIdsAttr(elem.getAttribute(ROLE_IDS_ATTR));
-    if (ids.includes(roleId)) {
-      elem.classList.toggle("highlight-role");
-    }
-  });
-}
-
-function resetHighlightRole() {
-  document.querySelectorAll(".highlight-role").forEach((elem) => {
-    elem.classList.remove("highlight-role");
-  });
-}
 
 function lineRoleLabel(ids: number[], roles: Record<number, string>): string {
   return ids.map((id) => roles[id] ?? "—").join(" / ");
@@ -48,11 +19,34 @@ export function Play({
     lines: LineInterface[];
   };
 }) {
+  const [selectedRoleIds, setSelectedRoleIds] = useState<Set<number>>(
+    () => new Set(),
+  );
+
+  const toggleRoleSelection = useCallback((roleId: number) => {
+    setSelectedRoleIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(roleId)) next.delete(roleId);
+      else next.add(roleId);
+      return next;
+    });
+  }, []);
+
+  const resetSelection = useCallback(() => {
+    setSelectedRoleIds(new Set());
+  }, []);
+
   const roles =
     play.roles?.reduce<Record<number, string>>((acc, role) => {
       acc[role.id] = role.name;
       return acc;
     }, {}) ?? {};
+
+  const lineHighlighted = useCallback(
+    (ids: number[]) =>
+      ids.length > 0 && ids.some((id) => selectedRoleIds.has(id)),
+    [selectedRoleIds],
+  );
 
   return (
     <div className={"flex w-9/10 flex-col justify-center"}>
@@ -63,15 +57,16 @@ export function Play({
         {play.roles
           .filter((role) => role.name)
           .map((role) => {
+            const on = selectedRoleIds.has(role.id);
             return (
               <div
-                data-role-id={role.id}
                 className={
-                  "role inline-block cursor-pointer hover:opacity-75"
+                  "role inline-block cursor-pointer hover:opacity-75" +
+                  (on ? " highlight-role" : "")
                 }
                 key={role.id}
               >
-                <div onClick={() => highlightRole(role.id)}>
+                <div onClick={() => toggleRoleSelection(role.id)}>
                   [{role.name}]
                 </div>
               </div>
@@ -79,7 +74,7 @@ export function Play({
           })}
         <div
           className={"role inline-block cursor-pointer hover:opacity-75"}
-          onClick={() => resetHighlightRole()}
+          onClick={resetSelection}
         >
           [X]
         </div>
@@ -93,6 +88,7 @@ export function Play({
               roleIds={ids}
               roleLabel={lineRoleLabel(ids, roles)}
               line={line.line}
+              highlighted={lineHighlighted(ids)}
             />
           );
         })}
