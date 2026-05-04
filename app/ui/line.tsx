@@ -1,25 +1,39 @@
 export function Line({
-    roleId,
-    role,
-    line
+  roleIds,
+  roleLabel,
+  line,
 }: {
-    roleId: number,
-    role: string,
-    line: Array<{
-        s: string,
-        action?: boolean
-    }>
+  roleIds: number[];
+  roleLabel: string;
+  line: Array<{
+    s: string;
+    action?: boolean;
+  }>;
 }) {
-    return (
-        <div className='play-line flex flex-row w-full p-2'>
-            <div className={'w-32'} role-id={roleId}>
-                <span>{role}</span>
-            </div>
-            <div className={'flex flex-col'} role-id={roleId}>
-                {line.filter(text => text.s).map( (text, index) => {
-                    return <span key={index} className={'play-line-text ' + (text.action? 'italic ': ' ')}>{text.s}<br/></span>
-                })}
-            </div>
-        </div>
-    );
+  const roleIdsAttr = roleIds.join(",");
+
+  return (
+    <div className="play-line flex w-full flex-row p-2">
+      <div className="min-w-[9rem] max-w-[14rem] shrink-0 pr-2" data-role-ids={roleIdsAttr}>
+        <span>{roleLabel}</span>
+      </div>
+      <div className="flex flex-col" data-role-ids={roleIdsAttr}>
+        {line
+          .filter((text) => text.s)
+          .map((text, index) => {
+            return (
+              <span
+                key={index}
+                className={
+                  "play-line-text " + (text.action ? "italic " : " ")
+                }
+              >
+                {text.s}
+                <br />
+              </span>
+            );
+          })}
+      </div>
+    </div>
+  );
 }
