@@ -14,10 +14,13 @@ export function Line({
 
   return (
     <div className="play-line flex w-full flex-row p-2">
-      <div className="min-w-[9rem] max-w-[14rem] shrink-0 pr-2" data-role-ids={roleIdsAttr}>
-        <span>{roleLabel}</span>
+      <div
+        className="box-border w-1/4 shrink-0 pr-2 text-left text-sm leading-snug md:w-52 md:pr-3 md:text-base"
+        data-role-ids={roleIdsAttr}
+      >
+        <span className="block break-words">{roleLabel}</span>
       </div>
-      <div className="flex flex-col" data-role-ids={roleIdsAttr}>
+      <div className="min-w-0 flex-1 flex flex-col" data-role-ids={roleIdsAttr}>
         {line
           .filter((text) => text.s)
           .map((text, index) => {
