@@ -54,7 +54,6 @@ body {
   display: block;
 }
 
-/* Ремарки (action): видимость текста 20 % (остальное — прозрачность фона сквозь буквы). */
 .play-line-text.play-line-action {
   opacity: 0.6;
 }
