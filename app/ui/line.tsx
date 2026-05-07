@@ -33,7 +33,8 @@ export function Line({
               <span
                 key={index}
                 className={
-                  "play-line-text " + (text.action ? "italic " : " ")
+                  "play-line-text " +
+                  (text.action ? "italic play-line-action " : " ")
                 }
               >
                 {text.s}
