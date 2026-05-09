@@ -3,16 +3,33 @@
 import { Play } from "../ui/play";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState, Suspense } from "react";
-import Link from "next/link";
+import { BackNavLink } from "../ui/BackNavLink";
 import { parsePlaySlug } from "../lib/parsePlaySlug";
 import type { LineInterface } from "../interfaces/LineInterface";
 import type { RoleInterface } from "../interfaces/RoleInterface";
+import { usePlayScrollPersistence } from "./usePlayScrollPersistence";
 
 type PlayDocument = {
   title: string;
   roles: RoleInterface[];
   lines: LineInterface[];
 };
+
+function PlayLoadedView({
+  slug,
+  data,
+}: {
+  slug: string;
+  data: PlayDocument;
+}) {
+  usePlayScrollPersistence(slug);
+  return (
+    <div className="m-1 flex flex-col">
+      <BackNavLink className="ml-3 mt-3" />
+      <Play key={slug} play={data} playSlug={slug} />
+    </div>
+  );
+}
 
 function PlayPageInner() {
   const searchParams = useSearchParams();
@@ -56,13 +73,8 @@ function PlayPageInner() {
   if (slug === null) {
     return (
       <div className="m-4 flex flex-col gap-3">
+        <BackNavLink />
         <p>Укажите корректное имя пьесы в адресе (только латиница a–z).</p>
-        <Link
-          className="font-medium text-blue-600 dark:text-blue-500"
-          href="/"
-        >
-          НАЗАД
-        </Link>
       </div>
     );
   }
@@ -71,28 +83,13 @@ function PlayPageInner() {
   if (!data) {
     return (
       <div className="m-4 flex flex-col gap-3">
+        <BackNavLink />
         <p>Не удалось загрузить пьесу.</p>
-        <Link
-          className="font-medium text-blue-600 dark:text-blue-500"
-          href="/"
-        >
-          НАЗАД
-        </Link>
       </div>
     );
   }
 
-  return (
-    <div className="m-1 flex flex-col">
-      <Link
-        className="ml-3 mt-3 font-medium text-blue-600 dark:text-blue-500"
-        href="/"
-      >
-        НАЗАД
-      </Link>
-      <Play play={data} />
-    </div>
-  );
+  return <PlayLoadedView slug={slug} data={data} />;
 }
 
 export default function Page() {

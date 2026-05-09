@@ -1,10 +1,44 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Line } from "./line";
 import type { LineInterface } from "../interfaces/LineInterface";
 import type { RoleInterface } from "../interfaces/RoleInterface";
 import { lineRoleIds } from "../lib/lineRoleIds";
+
+const LS_KEY_PREFIX = "pentola:play:selectedRoles:";
+
+function loadRoleSelection(slug: string, validIds: Set<number>): Set<number> {
+  if (typeof window === "undefined") return new Set();
+  try {
+    const raw = window.localStorage.getItem(LS_KEY_PREFIX + slug);
+    if (!raw) return new Set();
+    const parsed = JSON.parse(raw) as unknown;
+    if (!Array.isArray(parsed)) return new Set();
+    const next = new Set<number>();
+    for (const x of parsed) {
+      if (typeof x === "number" && Number.isInteger(x) && validIds.has(x)) {
+        next.add(x);
+      }
+    }
+    return next;
+  } catch {
+    return new Set();
+  }
+}
+
+function saveRoleSelection(slug: string, ids: Set<number>) {
+  if (typeof window === "undefined") return;
+  try {
+    const sorted = [...ids].sort((a, b) => a - b);
+    window.localStorage.setItem(
+      LS_KEY_PREFIX + slug,
+      JSON.stringify(sorted),
+    );
+  } catch {
+    /* quota / private mode */
+  }
+}
 
 function lineRoleLabel(ids: number[], roles: Record<number, string>): string {
   return ids.map((id) => roles[id] ?? "—").join(" / ");
@@ -12,16 +46,30 @@ function lineRoleLabel(ids: number[], roles: Record<number, string>): string {
 
 export function Play({
   play,
+  playSlug,
 }: {
   play: {
     title: string;
     roles: RoleInterface[];
     lines: LineInterface[];
   };
+  /** Slug из URL (`?name=…`); без него выбор в localStorage не сохраняется. */
+  playSlug?: string;
 }) {
-  const [selectedRoleIds, setSelectedRoleIds] = useState<Set<number>>(
-    () => new Set(),
+  const validRoleIds = useMemo(
+    () => new Set(play.roles.map((r) => r.id)),
+    [play.roles],
   );
+
+  const [selectedRoleIds, setSelectedRoleIds] = useState<Set<number>>(() => {
+    if (!playSlug) return new Set();
+    return loadRoleSelection(playSlug, validRoleIds);
+  });
+
+  useEffect(() => {
+    if (!playSlug) return;
+    saveRoleSelection(playSlug, selectedRoleIds);
+  }, [playSlug, selectedRoleIds]);
 
   const toggleRoleSelection = useCallback((roleId: number) => {
     setSelectedRoleIds((prev) => {
