@@ -30,7 +30,7 @@ function loadRoleSelection(slug: string, validIds: Set<number>): Set<number> {
 function saveRoleSelection(slug: string, ids: Set<number>) {
   if (typeof window === "undefined") return;
   try {
-    const sorted = [...ids].sort((a, b) => a - b);
+    const sorted = Array.from(ids).sort((a, b) => a - b);
     window.localStorage.setItem(
       LS_KEY_PREFIX + slug,
       JSON.stringify(sorted),
